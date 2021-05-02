@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-for n in $(ls *.ts )
+for n in $(ls -A1 tests/*.ts)
 do
     echo "Working on $n file name"
     
-    jsSub=$(echo "$n" | sed "s/.ts//")
+    jsSub=$(echo "$n" | sed "s/tests[/]//" | sed "s/.ts//")
     echo "$jsSub"
 
     yarn webpack ./$n -c webpack.config.js -o dist/$jsSub
