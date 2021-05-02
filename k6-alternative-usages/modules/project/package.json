@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "run:dist": "k6 run dist/external.js",
+    "test": "yarn build && yarn run:dist"
   },
   "devDependencies": {
     "@babel/core": "^7.14.0",

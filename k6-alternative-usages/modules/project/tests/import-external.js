@@ -6,17 +6,31 @@
 import http from "k6/http";
 import { check } from "k6";
 import { Scenario, setupFromScenario } from "../utils/helpers.js"; // PS: .js is required!
-import { Log, LogLevel } from "k6-shared-functions"
+import { Log, LogLevel } from "../node_modules/k6-shared-functions" // PS ../node_modules/ is required 
+
 export let options = setupFromScenario(Scenario.local);
 
 Log.minLevel = LogLevel.debug
 const logger = Log.for("import-external")
 
-export default function () {
+export function setup() {
   logger.info("Getting started")
-  let response = http.get("http://localhost:5000/weatherforecast_intro");
-  logger.debug(response)
-  check(response, { "200 OK": res => res.status === 200 });
-  logger.info("done")
+  return {
+    message: "setupdata"
+  }
+}
 
+export default function (data) {
+  logger.info(`Inside function with ${data.message}`);
+
+  let response = http.get("http://localhost:5000/weatherforecast_intro");
+
+  logger.debug(response)
+
+  check(response, { "200 OK": res => res.status === 200 });
 };
+
+export function teardown(data) {
+  logger.info(`done with ${data.message}`)
+}
+
