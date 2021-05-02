@@ -1,0 +1,14 @@
+{
+  "name": "k6-shared-functions",
+  "version": "1.0.0",
+  "main": "./entry.js",
+  "types": "./entry.d.ts",
+  "license": "MIT",
+  "description": "This is the common library for k6",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^4.2.4"
+  }
+}
